@@ -21,6 +21,13 @@ class SendMail(sender: String, appPassword: String) {
     override protected def getPasswordAuthentication = new PasswordAuthentication(sender, appPassword)
   })
 
+  /**
+   * sends an email to recipient. subject is the subject of the email and text is the body of the email.
+   * @param recipient
+   * @param subject
+   * @param text
+   * @return boolean indicating success
+   */
   def send(recipient: String, subject: String, text: String): Boolean = {
     try
     {
