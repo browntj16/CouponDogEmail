@@ -1,4 +1,4 @@
-import java.sql.ResultSet
+import java.sql.{ResultSet, SQLException}
 import java.util
 
 class QueryTables(username: String, password: String) {
@@ -6,16 +6,18 @@ class QueryTables(username: String, password: String) {
     val couponTable= "sys.coupons";
     val db: DBConnection = new DBConnection(userName = username, password = password);
 
+    @throws[SQLException]("SQL Error")
     def getBestEmails(): util.ArrayList[String] = {
-        val rs = db.executeQuery("SELECT email FROM " + emailTable + "WHERE rec_count>=10");
+        val rs = db.executeQuery("SELECT email FROM " + emailTable + " WHERE rec_count>=10");
         if(!rs.next()){
             return new util.ArrayList[String]();
         }
         val list = new util.ArrayList[String]();
         resultSetToArrayList(rs, list, "email");
     }
-  def getOtherEmails(rec_count: Int): util.ArrayList[String] = {
-    val rs = db.executeQuery("SELECT email FROM " + emailTable + "WHERE rec_count<10");
+  @throws[SQLException]("SQL Error")
+  def getOtherEmails(): util.ArrayList[String] = {
+    val rs = db.executeQuery("SELECT email FROM " + emailTable + " WHERE rec_count<10");
     if(!rs.next()){
       return new util.ArrayList[String]();
     }
@@ -28,14 +30,16 @@ class QueryTables(username: String, password: String) {
    * @param quality
    * @return
    */
-  def getCoupons(quality: String): util.ArrayList[String] = {
-    val rs = db.executeQuery("SELECT coupon FROM " + couponTable + "WHERE quality='"+quality+"'");
+  @throws[SQLException]("SQL Error")
+  def getCoupons(quality: Int): util.ArrayList[String] = {
+    val rs = db.executeQuery("SELECT coupon FROM " + couponTable + " WHERE quality="+quality);
     if(!rs.next()){ //if result set is empty
       return new util.ArrayList[String]();
     }
     val list = new util.ArrayList[String]();
     resultSetToArrayList(rs, list, "coupon");
   }
+
 
   /**
    * make sure you arent on the first result of resultset when you run this

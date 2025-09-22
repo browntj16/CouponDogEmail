@@ -37,7 +37,7 @@ class SendMail(sender: String, appPassword: String) {
       message.setSubject(subject);
 
       // set body of the email.
-      message.setText(text);
+      message.setContent(text, "text/html");
 
       // Send email.
       Transport.send(message);

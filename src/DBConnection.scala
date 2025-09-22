@@ -17,14 +17,14 @@ class DBConnection(userName: String, password: String) {
     @throws[SQLException]("SQL Error")
     def executeQuery(query: String): ResultSet = {
         val statement: Statement = connection.createStatement();
-        statement.close();
+        //statement.close();
         return statement.executeQuery(query);
     }
 
     @throws[SQLException]("SQL Error")
     def executeUpdate(query: String): ResultSet = {
         val statement: Statement = connection.createStatement();
-        statement.close();
+        //statement.close();
         return statement.executeQuery(query);
     }
 
