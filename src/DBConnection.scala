@@ -1,4 +1,3 @@
-import java.sql
 import java.sql._;
 
 class DBConnection(userName: String, password: String) {
@@ -10,7 +9,7 @@ class DBConnection(userName: String, password: String) {
 
     /**
      * these twin functions are both inherently impure. accessing a database is, inherently impure. the query can vary based
-     * on when it is executed. both are just quick and dirty ways to execture query or update
+     * on when it is executed. both are just quick and dirty ways to execute query or update
      * @param query
      * @throws SQLException
      * @return
